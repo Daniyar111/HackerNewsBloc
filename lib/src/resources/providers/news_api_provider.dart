@@ -9,6 +9,7 @@ final _baseUrl = 'https://hacker-news.firebaseio.com/v0';
 
 class NewsApiProvider implements Source{
 
+
   Client client = Client();
 
   @override
