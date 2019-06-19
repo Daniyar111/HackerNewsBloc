@@ -14,24 +14,22 @@ class ItemModel{
   final String url;
   final int score;
   final String title;
-  final String parts;
   final int descendants;
 
   ItemModel.fromJson(Map<String, dynamic> parsedJson)
       : id = parsedJson['id'],
-        deleted = parsedJson['deleted'],
+        deleted = parsedJson['deleted'] ?? false,
         type = parsedJson['type'],
         by = parsedJson['by'],
         time = parsedJson['time'],
-        text = parsedJson['text'],
-        dead = parsedJson['dead'],
+        text = parsedJson['text'] ?? '',
+        dead = parsedJson['dead'] ?? false,
         parent = parsedJson['parent'],
-        kids = parsedJson['kids'],
+        kids = parsedJson['kids'] ?? [],
         url = parsedJson['url'],
         score = parsedJson['score'],
-        title = parsedJson['title'],
-        parts = parsedJson['parts'],
-        descendants = parsedJson['descendants'];
+        title = parsedJson['title'] ?? '',
+        descendants = parsedJson['descendants'] ?? 0;
 
   ItemModel.fromDb(Map<String, dynamic> parsedJson)
       : id = parsedJson['id'],
@@ -46,7 +44,6 @@ class ItemModel{
         url = parsedJson['url'],
         score = parsedJson['score'],
         title = parsedJson['title'],
-        parts = parsedJson['parts'],
         descendants = parsedJson['descendants'];
 
   Map<String, dynamic> toMapForDb(){
@@ -63,7 +60,6 @@ class ItemModel{
       'url': url,
       'score': score,
       'title': title,
-      'parts': parts,
       'descendants': descendants
     };
   }
