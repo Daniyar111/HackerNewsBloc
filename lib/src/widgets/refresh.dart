@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../blocs/stories_provider.dart';
+import 'package:news/src/blocs/stories/stories_provider.dart';
 
 class Refresh extends StatelessWidget {
 

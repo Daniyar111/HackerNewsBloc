@@ -1,35 +1,28 @@
 import 'package:flutter/material.dart';
 
-import '../blocs/stories_provider.dart';
+import 'package:news/src/blocs/stories/stories_provider.dart';
 import '../widgets/news_list_tile.dart';
 import '../widgets/refresh.dart';
 
 class NewsList extends StatelessWidget {
 
   @override
-  Widget build(BuildContext context) {
-
+  Widget build(context) {
     final bloc = StoriesProvider.of(context);
-
-    // THIS IS BAD!!! DON'T DO THIS
-    // TEMPORARY
-    bloc.fetchTopIds();
 
     return Scaffold(
       appBar: AppBar(
         title: Text('Top News'),
       ),
-//      body: _buildList(),
-      body: _buildList(bloc),
+      body: buildList(bloc),
     );
   }
 
-  Widget _buildList(StoriesBloc bloc){
-
+  Widget buildList(StoriesBloc bloc) {
     return StreamBuilder(
       stream: bloc.topIds,
-      builder: (BuildContext context, AsyncSnapshot<List<int>> snapshot){
-        if(!snapshot.hasData){
+      builder: (context, AsyncSnapshot<List<int>> snapshot) {
+        if (!snapshot.hasData) {
           return Center(
             child: CircularProgressIndicator(),
           );
@@ -38,8 +31,7 @@ class NewsList extends StatelessWidget {
         return Refresh(
           child: ListView.builder(
             itemCount: snapshot.data.length,
-            itemBuilder: (BuildContext context, int index){
-
+            itemBuilder: (context, int index) {
               bloc.fetchItem(snapshot.data[index]);
 
               return NewsListTile(
